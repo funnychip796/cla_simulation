@@ -60,6 +60,9 @@ module tb_cla_schemes;
         $display("   26-bit/28-bit CLA Critical Path Simulation");
         $display("==================================================");
         
+        $dumpfile("cla_simulation.vcd");
+        $dumpvars(0, tb_cla_schemes);
+        
         // 初始化稳定状态
         x = 0; y = 0; cin = 0;
         #50;

@@ -29,8 +29,6 @@ We cascaded these modules in different arrangements to find the optimal delay. T
    **Critical Path Delay: 10 ΔG** (Optimal)
 4. **Scheme 4:** `4b → 4b → 16b → 4b` (28-bit structure used as 26-bit)  
    **Critical Path Delay: 10 ΔG** (Optimal)
-5. **Scheme 5 (High-order 16b):** `4b → 4b → 4b → 16b` (28-bit structure used as 26-bit)  
-   **Critical Path Delay: 12 ΔG** (Suboptimal)
 
 ## Key Takeaway: Delay Masking
 
@@ -40,10 +38,10 @@ A common intuition is to place the largest block (16-bit CLA) at the most signif
 
 ## Simulation Details
 
-The repository uses Verilog `specify` blocks to mock the exact hardware path delays for each block. This allows for cycle-accurate timing simulation.
+The repository uses structural macro-models with explicit continuous assignments to mock the exact hardware path delays for each block. This allows for cycle-accurate timing simulation without relying on simulator-specific specify block configurations.
 
 ### Files:
 - `FA_beh.v`: Timing-annotated behavioral model of a 1-bit FA.
 - `CLA4_beh.v`: Timing-annotated behavioral model of a 4-bit CLA.
 - `CLA16_beh.v`: Timing-annotated behavioral model of a 16-bit CLA.
-- `tb_cla_schemes.v`: Testbench instantiating and testing all 5 schemes simultaneously under the worst-case carry ripple scenario.
+- `tb_cla_schemes.v`: Testbench instantiating and testing all 4 schemes simultaneously under the worst-case carry ripple scenario.

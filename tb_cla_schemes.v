@@ -42,13 +42,6 @@ module tb_cla_schemes;
     CLA16_beh u4_3  (x[23:8],    y[23:8],    c4_8,  s4[23:8],  c4_24);
     CLA4_beh  u4_4  (x[27:24],   y[27:24],   c4_24, s4[27:24], c4_28);
 
-    // ----- Scheme 5: 4b -> 4b -> 4b -> 16b (28 bits, 高16位放置) -----
-    wire [27:0] s5;
-    wire c5_4, c5_8, c5_12, c5_28;
-    CLA4_beh  u5_1  (x[3:0],     y[3:0],     cin,   s5[3:0],   c5_4);
-    CLA4_beh  u5_2  (x[7:4],     y[7:4],     c5_4,  s5[7:4],   c5_8);
-    CLA4_beh  u5_3  (x[11:8],    y[11:8],    c5_8,  s5[11:8],  c5_12);
-    CLA16_beh u5_4  (x[27:12],   y[27:12],   c5_12, s5[27:12], c5_28);
 
     // ----------------------------------------------------
     // 测试激励：产生最长进位链
@@ -86,6 +79,6 @@ module tb_cla_schemes;
     always @(s2) if ($time > t_start) $display("[Scheme 2: FA->4b->4b->16b->FA] S updated at +%0t ns", $time - t_start);
     always @(s3) if ($time > t_start) $display("[Scheme 3: 4b->16b->4b->4b]     S updated at +%0t ns", $time - t_start);
     always @(s4) if ($time > t_start) $display("[Scheme 4: 4b->4b->16b->4b]     S updated at +%0t ns", $time - t_start);
-    always @(s5) if ($time > t_start) $display("[Scheme 5: 4b->4b->4b->16b]     S updated at +%0t ns  <-- 12 ΔG", $time - t_start);
+
 
 endmodule

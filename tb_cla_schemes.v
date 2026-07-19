@@ -1,7 +1,7 @@
 `timescale 1ns/1ns
 
 // ====================================================
-// Testbench 仿真五种排列方案
+// Testbench for simulating different cascaded structures
 // ====================================================
 module tb_cla_schemes;
 
@@ -44,7 +44,7 @@ module tb_cla_schemes;
 
 
     // ----------------------------------------------------
-    // 测试激励：产生最长进位链
+    // Test Stimulus: Generate the longest carry chain ripple
     // ----------------------------------------------------
     time t_start;
 
@@ -56,25 +56,25 @@ module tb_cla_schemes;
         $dumpfile("cla_simulation.vcd");
         $dumpvars(0, tb_cla_schemes);
         
-        // 初始化稳定状态
+        // Initialize stable state
         x = 0; y = 0; cin = 0;
         #50;
         
         $display("\nApplying worst-case stimulus at Time %0t...", $time);
         t_start = $time;
         
-        // 使用极限输入：触发完整的进位涟波 (ripple)
+        // Apply extreme worst-case input to trigger full carry ripple
         x = 28'hFFFFFFF;
         y = 28'h0000001; 
         cin = 0;
         
-        // 留够时间让所有信号结算
+        // Allow enough time for all signals to settle
         #30;
         $display("\nSimulation Complete.");
         $finish;
     end
     
-    // 捕获各方案求和输出变化（你将在控制台看到每种方案最后稳定的准确纳秒级时间）
+    // Capture sum output updates (You will see the precise settling nanosecond timestamp for each scheme)
     always @(s1) if ($time > t_start) $display("[Scheme 1: FA->4b->16b->4b->FA] S updated at +%0t ns", $time - t_start);
     always @(s2) if ($time > t_start) $display("[Scheme 2: FA->4b->4b->16b->FA] S updated at +%0t ns", $time - t_start);
     always @(s3) if ($time > t_start) $display("[Scheme 3: 4b->16b->4b->4b]     S updated at +%0t ns", $time - t_start);

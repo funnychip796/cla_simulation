@@ -1,8 +1,7 @@
 # 26-bit CLA Critical Path Analysis & Simulation
 
-This repository contains Verilog simulation models to analyze and verify the critical path delay of various **26-bit / 28-bit Carry Lookahead Adder (CLA)** structures. 
+This repository contains Verilog simulation models to analyze and verify the critical path delay of various **26-bit / 28-bit Carry Lookahead Adder (CLA)** structures.
 
-The analysis is based on the article: [26-bit CLA Critical Path Analysis](https://0.707106.xyz/26-bit_CLA_Critical_Path_Analysis.html).
 
 ## Background & Module Delays
 We want to construct the fastest possible 26-bit (or 28-bit) adder using three basic building blocks: a 1-bit Full Adder (FA), a 4-bit CLA block, and a 16-bit CLA block. The delays for these blocks are given in terms of gate delays ($\Delta G$):

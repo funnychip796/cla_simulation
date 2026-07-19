@@ -46,8 +46,4 @@ The repository uses Verilog `specify` blocks to mock the exact hardware path del
 - `CLA16_beh.v`: Timing-annotated behavioral model of a 16-bit CLA.
 - `tb_cla_schemes.v`: Testbench instantiating and testing all 5 schemes simultaneously under the worst-case carry ripple scenario.
 
-### Running Simulation (QuestaSim)
-```bash
-vlog *.v
-vsim -c tb_cla_schemes -do "run -all; quit"
-```
+

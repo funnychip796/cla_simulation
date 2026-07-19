@@ -7,9 +7,9 @@ We want to construct the fastest possible 26-bit adder using three basic buildin
 
 *Note: For structures that naturally form a 28-bit adder (e.g., using one 16-bit block and three 4-bit blocks), we use them to implement the 26-bit adder simply by grounding the highest 2 bits (setting inputs to 0). This does not change the critical path.*
 
-The delays for these building blocks are given in terms of gate delays ($\Delta G$):
+The delays for these building blocks are given in terms of gate delays ($$\Delta G$$):
 
-| Module | $XY \to S$ | $XY \to C_{out}$ | $C_{in} \to C_{out}$ | $C_{in} \to S$ |
+| Module | $$XY \to S$$ | $$XY \to C_{out}$$ | $$C_{in} \to C_{out}$$ | $$C_{in} \to S$$ |
 |--------|:---:|:---:|:---:|:---:|
 | **FA (1-bit)** | 2 | 2 | 2 | 2 |
 | **4-bit CLA** | 4 | 3 | 2 | 3 |

@@ -1,10 +1,13 @@
 # 26-bit CLA Critical Path Analysis & Simulation
 
-This repository contains Verilog simulation models to analyze and verify the critical path delay of various **26-bit / 28-bit Carry Lookahead Adder (CLA)** structures.
-
+This repository contains Verilog simulation models to analyze and verify the critical path delay of various cascaded structures for building a **26-bit Carry Lookahead Adder (CLA)**.
 
 ## Background & Module Delays
-We want to construct the fastest possible 26-bit (or 28-bit) adder using three basic building blocks: a 1-bit Full Adder (FA), a 4-bit CLA block, and a 16-bit CLA block. The delays for these blocks are given in terms of gate delays ($\Delta G$):
+We want to construct the fastest possible 26-bit adder using three basic building blocks: a 1-bit Full Adder (FA), a 4-bit CLA block, and a 16-bit CLA block. 
+
+*Note: For structures that naturally form a 28-bit adder (e.g., using one 16-bit block and three 4-bit blocks), we use them to implement the 26-bit adder simply by grounding the highest 2 bits (setting inputs to 0). This does not change the critical path.*
+
+The delays for these building blocks are given in terms of gate delays ($\Delta G$):
 
 | Module | $XY \to S$ | $XY \to C_{out}$ | $C_{in} \to C_{out}$ | $C_{in} \to S$ |
 |--------|:---:|:---:|:---:|:---:|
@@ -18,15 +21,15 @@ We cascaded these modules in different arrangements to find the optimal delay. T
 
 ### Evaluated Configurations:
 
-1. **Scheme 1:** `FA → 4b → 16b → 4b → FA` (26-bit)  
+1. **Scheme 1:** `FA → 4b → 16b → 4b → FA` (Exact 26-bit)  
    **Critical Path Delay: 10 ΔG** (Optimal)
-2. **Scheme 2:** `FA → 4b → 4b → 16b → FA` (26-bit)  
+2. **Scheme 2:** `FA → 4b → 4b → 16b → FA` (Exact 26-bit)  
    **Critical Path Delay: 11 ΔG**
-3. **Scheme 3:** `4b → 16b → 4b → 4b` (28-bit)  
+3. **Scheme 3:** `4b → 16b → 4b → 4b` (28-bit structure used as 26-bit)  
    **Critical Path Delay: 10 ΔG** (Optimal)
-4. **Scheme 4:** `4b → 4b → 16b → 4b` (28-bit)  
+4. **Scheme 4:** `4b → 4b → 16b → 4b` (28-bit structure used as 26-bit)  
    **Critical Path Delay: 10 ΔG** (Optimal)
-5. **Scheme 5 (High-order 16b):** `4b → 4b → 4b → 16b` (28-bit)  
+5. **Scheme 5 (High-order 16b):** `4b → 4b → 4b → 16b` (28-bit structure used as 26-bit)  
    **Critical Path Delay: 12 ΔG** (Suboptimal)
 
 ## Key Takeaway: Delay Masking
@@ -37,12 +40,10 @@ A common intuition is to place the largest block (16-bit CLA) at the most signif
 
 ## Simulation Details
 
-The repository uses Verilog `specify` blocks to mock the exact hardware path delays for each block. This allows for cycle-accurate timing simulation using tools like **QuestaSim / ModelSim** or **Icarus Verilog**.
+The repository uses Verilog `specify` blocks to mock the exact hardware path delays for each block. This allows for cycle-accurate timing simulation.
 
 ### Files:
 - `FA_beh.v`: Timing-annotated behavioral model of a 1-bit FA.
 - `CLA4_beh.v`: Timing-annotated behavioral model of a 4-bit CLA.
 - `CLA16_beh.v`: Timing-annotated behavioral model of a 16-bit CLA.
 - `tb_cla_schemes.v`: Testbench instantiating and testing all 5 schemes simultaneously under the worst-case carry ripple scenario.
-
-

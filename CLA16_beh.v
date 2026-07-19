@@ -4,7 +4,7 @@
 // 3. 16-bit CLA 
 // XY->S=8, XY->Cout=5, Cin->Cout=2, Cin->S=5
 // ----------------------------------------------------
-module CLA16(input [15:0] x, input [15:0] y, input cin, output [15:0] s, output cout);
+module CLA16_beh(input [15:0] x, input [15:0] y, input cin, output [15:0] s, output cout);
     assign {cout, s} = x + y + cin;
     
     specify

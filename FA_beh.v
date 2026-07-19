@@ -4,7 +4,7 @@
 // 1. FA (1-bit)
 // XY->S=2, XY->Cout=2, Cin->Cout=2, Cin->S=2
 // ----------------------------------------------------
-module FA(input x, input y, input cin, output s, output cout);
+module FA_beh(input x, input y, input cin, output s, output cout);
     assign s = x ^ y ^ cin;
     assign cout = (x & y) | (x & cin) | (y & cin);
     
